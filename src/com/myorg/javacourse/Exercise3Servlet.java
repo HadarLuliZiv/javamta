@@ -10,7 +10,7 @@ public class Exercise3Servlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/html");
 		MathManager mathManager = new MathManager(50.0,30.0,50.0,20.0,30.0);
-		String resultStr = MathManager.getResults();
+		String resultStr = mathManager.getResults();
 		
 	    resp.getWriter().println(resultStr);
 
