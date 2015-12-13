@@ -1,6 +1,8 @@
 package com.myorg.javacourse.model;
 import java.util.Date;
 
+import com.myorg.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
+
 /**
  * The Stock class holds information about a stock that is 
  * part of a portfolio (e.g: symbol, ask, bid).
@@ -9,16 +11,14 @@ import java.util.Date;
  */
 public class Stock {
 
-	private final static int BUY = 0;
-	private final static int SELL = 1;
-	private final static int REMOVE = 2;
-	private final static int HOLD = 3;
 	private String symbol;
 	private float ask;
 	private float bid;
 	private Date date;
-	private int recommendation;
+	private ALGO_RECOMMENDATION recommendation;
 	private int stockQuantity;
+	
+
 
 	public Stock(String symbol, float ask, float bid){
 		this.symbol=symbol;
@@ -71,15 +71,16 @@ public class Stock {
 	 */
 	public String getHtmlDescription(){
 		String result = "<b>Stock symbol:</b> "+ getSymbol() +", <b>ask:</b> "+ 
-	getAsk()+", <b>bid</b>: "+ getBid()+" , <b>Stock date:</b> "+ this.date.getDate()+"/"+(this.date.getMonth()+1)+"/"+(1900+this.date.getYear());
+	getAsk()+", <b>bid</b>: "+ getBid()+" , <b>Stock date:</b> "+ this.date.getDate()+"/"+
+				(this.date.getMonth()+1)+"/"+(1900+this.date.getYear())+", <b>quantity:</b> "+getStockQuantity();
 		return result;
 	}
 
-	public int getRecommendation() {
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}
 
-	public void setRecommendation(int recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
 

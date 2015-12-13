@@ -8,22 +8,33 @@ import com.myorg.javacourse.model.Stock;
 public class PortfolioManager {
 
 	public Portfolio getPortfolio(){
-		Portfolio portfolio=new Portfolio("Hadar and Ziv's Portfolio");
-		Stock stock1=new Stock("PIH",(float) 13.1,(float) 12.4);
+		
 		Calendar c1=Calendar.getInstance();
-		c1.set(2014,10,15);
-		stock1.setDate(c1.getTime());
-		portfolio.addStock(stock1);
+		c1.set(2014,11,15);
 		
-		Stock stock2=new Stock("AAL",(float) 5.78,(float) 5.5);
-		stock2.setDate(c1.getTime());
-		portfolio.addStock(stock2);
+		Portfolio myPortfolio=new Portfolio("Exercise 7 portfolio");
+		myPortfolio.updateBalance(10000);
+		Stock stock4=new Stock("PIH",(float) 10.0,(float) 8.5);
+		stock4.setDate(c1.getTime());
+		Stock stock5=new Stock("AAL",(float) 30.0,(float) 25.5);
+		stock5.setDate(c1.getTime());
+		Stock stock6=new Stock("CAAS",(float) 20.0,(float) 15.5);
+		stock6.setDate(c1.getTime());
 		
-		Stock stock3=new Stock("CAAS",(float) 32.2,(float) 31.5);
-		stock3.setDate(c1.getTime());
-		portfolio.addStock(stock3);
+		myPortfolio.addStock(stock4);
+		myPortfolio.addStock(stock5);
+		myPortfolio.addStock(stock6);
+
+
+		myPortfolio.buyStock(stock4, 20);
+		myPortfolio.buyStock(stock5, 30);
+		myPortfolio.buyStock(stock6, 40);
 		
-		return portfolio;
+		myPortfolio.sellStock("AAL", -1);
+		myPortfolio.removeStock("CAAS");
+
+		
+		return myPortfolio;
 		
 	}
 }
