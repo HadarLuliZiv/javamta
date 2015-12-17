@@ -36,6 +36,13 @@ public class Portfolio {
 			this.stocks[i]=new Stock(portfolio.stocks[i]);
 		}
 	}
+	/**
+	 * The updateBalance method is responsible of updating the portfolio's
+	 * balance. get's an amount, adds it to the balance and returns a boolean 
+	 * result that indicates success.
+	 * @param amount
+	 * @return
+	 */
 	
 	public Boolean updateBalance(float amount){
 		
@@ -85,25 +92,12 @@ public class Portfolio {
 			System.out.println("Can’t add new stock, portfolio can have only "+ this.getPortfolioSize()+" stocks");
 	}
 	/**
-	 * The removeStock method is responsible of removing a stock from the stock's array.
+	 * The removeStock method is responsible of removing a stock from the stock's array:
+	 * first it sells all stock's with the symbol it gets, then it removes the stock completely from the
+	 * stock's array. 
 	 * @param stock
 	 */
-	public void removeStock(Stock stock){
-		
-		for(int i=0; i<this.getPortfolioSize()-1; i++)
-		{
-			if(this.getStocks()[i]==stock){
-				this.getStocks()[i]=this.getStocks()[this.portfolioSize-1];
-				this.getStocks()[this.portfolioSize-1]=null;
-				this.portfolioSize--;
-				break;
-			}
-			if(i==this.getPortfolioSize()-1){
-				System.out.println("This stock is not at this portfolio!");
-			}
-		}
-	}
-	
+
 	public Boolean removeStock(String stockSymbol){
 		
 		this.sellStock(stockSymbol, -1);
@@ -120,7 +114,15 @@ public class Portfolio {
 		System.out.println("This stock is not at this portfolio!");
 		return false;
 	}
-
+	/**
+	 * The sellStock method gets a stock's symbol and quantity, and sells a stock 
+	 * from the portfolio stock's array according to the parameters. if the quantity
+	 * is -1, the method sells all stock quantity there is. 
+	 * @param symbol
+	 * @param quantity
+	 * @return
+	 */
+	
 	public Boolean sellStock(String symbol, int quantity){
 		
 		if((quantity<0) && (quantity!=-1)){
@@ -153,21 +155,34 @@ public class Portfolio {
 		return false;
 	}
 	
+	/**
+	 * The buyStock method gets a stock and quantity and according to these 
+	 * parameters, it buy's stocks (considering the balance in the portfolio).
+	 * @param stock
+	 * @param quantity
+	 * @return
+	 */
 	public Boolean buyStock(Stock stock, int quantity){
 		
 		if((quantity<0) && (quantity!=-1)){
 			System.out.println("ERROR! quantity can't be negative!");
 			return false;
 		}
-		
-		for(int i=0; i <this.portfolioSize-1; i++){
-			if(this.stocks[i]==stock){
-				continue;
-			}
-			else{
-				this.addStock(stock);
+		if(this.portfolioSize>0){
+			for(int i=0; i <this.portfolioSize; i++){
+				if(this.stocks[i].getSymbol().equals(stock.getSymbol())){
+					break;
+				}
+				else{
+					this.addStock(stock);
+				}
 			}
 		}
+		else{
+			this.addStock(stock);
+		}
+			
+			
 		if(quantity==-1){
 			int newQuantity=(int) ((this.getBalance()/stock.getAsk()));
 			stock.setStockQuantity(stock.getStockQuantity()+newQuantity);
@@ -187,6 +202,13 @@ public class Portfolio {
 		}
 	}
 	
+	/**
+	 * The getStockValue is responsible of calculating the value of all
+	 * stock's in the portfolio according to this calculation:
+	 * stock's quantity*stock's bid value. then is sums all values and
+	 * return a result.
+	 * @return
+	 */
 	public float getStocksValue(){
 		float result=0;
 		for(int i=0; i <this.portfolioSize-1; i++){

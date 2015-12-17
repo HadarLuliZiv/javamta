@@ -20,11 +20,6 @@ public class PortfolioManager {
 		stock5.setDate(c1.getTime());
 		Stock stock6=new Stock("CAAS",(float) 20.0,(float) 15.5);
 		stock6.setDate(c1.getTime());
-		
-		myPortfolio.addStock(stock4);
-		myPortfolio.addStock(stock5);
-		myPortfolio.addStock(stock6);
-
 
 		myPortfolio.buyStock(stock4, 20);
 		myPortfolio.buyStock(stock5, 30);
